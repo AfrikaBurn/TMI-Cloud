@@ -14,6 +14,8 @@ services:
       - db
     volumes:
       - ./local/nextcloud:/var/www/html
+    env_file:
+      - .env
 
   db:
     container_name: tmi_cloud_data
@@ -22,6 +24,8 @@ services:
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
       - ./local/data:/var/lib/mysql
+    env_file:
+      - .env
 
   admin:
     container_name: tmi_cloud_admin
