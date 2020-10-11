@@ -7,18 +7,18 @@ services:
   app:
     container_name: tmi_cloud
     image: nextcloud
+    restart: always
     ports:
       - 41000:80
     links:
       - db
     volumes:
       - ./local/nextcloud:/var/www/html
-    restart: always
 
   db:
     container_name: tmi_cloud_data
     image: mariadb
-    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     restart: always
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
       - ./local/data:/var/lib/mysql
