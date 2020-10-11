@@ -24,7 +24,7 @@ services:
       - ./local/data:/var/lib/mysql
 
   admin:
-    container_name: tmi_access_token_admin
+    container_name: tmi_cloud_admin
     image: osixia/phpldapadmin:0.9.0
     restart: always
     ports:
