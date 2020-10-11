@@ -28,8 +28,8 @@ services:
     image: osixia/phpldapadmin:0.9.0
     restart: always
     ports:
-      - '11020:80'
-      - '11025:443'
+      - '41020:80'
+      - '41025:443'
     depends_on:
       - db
     environment:
