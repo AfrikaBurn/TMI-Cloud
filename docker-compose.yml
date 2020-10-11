@@ -1,21 +1,20 @@
-version: '2'
+version: '3'
 
 # Copy default.env to environment.env and change passwords.
 
 services:
 
-  cloud:
+  app:
     container_name: tmi_cloud
-    image: nextcloud
+    image: nextcloud:18.0
     restart: always
     ports:
       - 41000:80
-    links:
+    depends_on:
       - db
     volumes:
-      - ./local/nextcloud:/var/www/html
-    env_file:
-      - environment.env
+      - ./local/nextcloud/custom_apps:/var/www/html/custom_apps
+    env_file: environment.env
 
   db:
     container_name: tmi_cloud_data
@@ -24,12 +23,13 @@ services:
     command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
     volumes:
       - ./local/data:/var/lib/mysql
-    env_file:
-      - environment.env
+    env_file: environment.env
 
   admin:
     container_name: tmi_cloud_admin
     image: adminer
+    restart: always
     ports:
       - 41010:8080
-    restart: always
+    depends_on:
+      - db
