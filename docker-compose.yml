@@ -14,6 +14,7 @@ services:
       - db
     volumes:
       - ./local/nextcloud:/var/www/html
+    env_file: environment.env
 
   db:
     container_name: tmi_cloud_data
